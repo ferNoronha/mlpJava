@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="1373.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redesneurais.FXMLDocumentController">
+   <top>
+      <AnchorPane prefHeight="151.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar prefHeight="25.0" prefWidth="1373.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Arquivo">
+                  <items>
+                    <MenuItem fx:id="btArquivo" mnemonicParsing="false" onAction="#clkArquivo" text="Abrir Arquivo Treinamento" />
+                        <MenuItem fx:id="btArquivoTeste" mnemonicParsing="false" onAction="#clkArquivoTeste" text="Abrir Arquivo Teste" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Função de Transferência">
+                  <items>
+                        <RadioMenuItem fx:id="rbLogistica" mnemonicParsing="false" text="Logística">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grupo1" />
+                           </toggleGroup></RadioMenuItem>
+                        <RadioMenuItem fx:id="rbLinear" mnemonicParsing="false" text="Linear" toggleGroup="$grupo1" />
+                        <RadioMenuItem fx:id="rbHiperbolica" mnemonicParsing="false" text="Hiperbólica" toggleGroup="$grupo1" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label layoutX="30.0" layoutY="46.0" text="Camada Entrada:" />
+            <Label layoutX="30.0" layoutY="78.0" text="Camada Saida:" />
+            <Label layoutX="30.0" layoutY="114.0" text="Camada Oculta:" />
+            <TextField fx:id="txEntrada" disable="true" layoutX="128.0" layoutY="42.0" />
+            <TextField fx:id="txSaida" disable="true" layoutX="128.0" layoutY="74.0" />
+            <TextField fx:id="txOculta" layoutX="129.0" layoutY="110.0" />
+            <TextField fx:id="txErro" layoutX="421.0" layoutY="42.0" prefHeight="25.0" prefWidth="63.0" />
+            <TextField fx:id="txIteracao" layoutX="421.0" layoutY="110.0" prefHeight="25.0" prefWidth="63.0" />
+            <Label layoutX="331.0" layoutY="47.0" text="Valor do Erro:" />
+            <Label layoutX="302.0" layoutY="114.0" text="Número de Iterações:" />
+            <Label layoutX="392.0" layoutY="78.0" text="N:" />
+            <TextField fx:id="txN" layoutX="423.0" layoutY="74.0" prefHeight="25.0" prefWidth="61.0" />
+            <Button fx:id="btnAvancar" layoutX="1054.0" layoutY="45.0" mnemonicParsing="false" onAction="#clkAvancar1" text="Normalizar" visible="false" />
+            <Button fx:id="btnProx" layoutX="1056.0" layoutY="82.0" mnemonicParsing="false" onAction="#clkProx" prefHeight="25.0" prefWidth="73.0" text="Avancar" visible="false" />
+            <Button fx:id="btnTreinar" layoutX="965.0" layoutY="36.0" mnemonicParsing="false" onAction="#clkTreinar" prefHeight="91.0" prefWidth="129.0" text="TREINAR" />
+            <Label layoutX="508.0" layoutY="46.0" text="Arquivo Treinamento">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="561.0" layoutY="95.0" text="Arquivo Teste">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txTreinamento" disable="true" layoutX="675.0" layoutY="46.0" prefHeight="25.0" prefWidth="230.0" promptText="Arquivo Treinamento" />
+            <TextField fx:id="txTeste" disable="true" layoutX="675.0" layoutY="95.0" prefHeight="25.0" prefWidth="231.0" promptText="Arquivo Teste" />
+            <Button fx:id="btnNormalizado" layoutX="1187.0" layoutY="39.0" mnemonicParsing="false" onAction="#clkMostrarNormal" prefHeight="90.0" prefWidth="127.0" text="NORMALIZADO" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="328.0" prefWidth="927.0" BorderPane.alignment="CENTER">
+         <children>
+            <BarChart fx:id="grTreinar" layoutX="697.0" layoutY="14.0" prefHeight="262.0" prefWidth="665.0" title="Treinamento">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <ScrollPane prefHeight="460.0" prefWidth="703.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="688.0">
+                     <children>
+                        <TableView fx:id="tbN" layoutX="56.0" layoutY="50.0" prefHeight="277.0" prefWidth="577.0" />
+                        <TableView fx:id="tbTeste" layoutX="56.0" layoutY="374.0" prefHeight="306.0" prefWidth="577.0" />
+                        <Label layoutX="259.0" layoutY="13.0" prefHeight="37.0" prefWidth="168.0" text="TABELA DE TREINAMENTO" textAlignment="JUSTIFY" textOverrun="WORD_ELLIPSIS">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="283.0" layoutY="337.0" prefHeight="37.0" prefWidth="168.0" text="TABELA DE TESTE" textAlignment="JUSTIFY" textOverrun="WORD_ELLIPSIS">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbTreinoNormal" layoutX="57.0" layoutY="51.0" prefHeight="274.0" prefWidth="574.0" visible="false" />
+                        <TableView fx:id="tbTesteNormal" layoutX="55.0" layoutY="377.0" prefHeight="174.0" prefWidth="577.0" visible="false" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <TableView fx:id="tbConfusao" layoutX="847.0" layoutY="266.0" prefHeight="177.0" prefWidth="503.0" />
+            <Button fx:id="btnTeste" layoutX="731.0" layoutY="314.0" mnemonicParsing="false" onAction="#clkTeste" prefHeight="82.0" prefWidth="101.0" text="TESTAR" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
